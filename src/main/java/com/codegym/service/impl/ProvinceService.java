@@ -11,7 +11,7 @@ import java.util.Optional;
 
 //danh day day la service
 //tao bean thuoc tang service cho ung dung IoC
-//@Service
+@Service
 public class ProvinceService implements IProvinceService {
     @Autowired
     private IProvinceRepository iProvinceRepository;
@@ -38,6 +38,10 @@ public class ProvinceService implements IProvinceService {
 
     public Iterable<ICountCustomer> getCountCustomers(){
         return iProvinceRepository.getCountCustomers();
+    };
+
+    public void deleteProvinceById(Long id){
+        iProvinceRepository.deleteProvinceById(id);
     };
 
 }
