@@ -27,6 +27,8 @@ public class ProvinceController {
         ModelAndView modelAndView = new ModelAndView("/province/list");
         Iterable<Province> provinces = provinceService.findAll();
         modelAndView.addObject("provinces", provinces);
+        Iterable<ICountCustomer> province1 = provinceService.getCountCustomers();
+        modelAndView.addObject("province1", province1);
         return modelAndView;
     }
 
@@ -69,6 +71,12 @@ public class ProvinceController {
             return new ModelAndView("/error_404");
         }
     }
+    @GetMapping("/delete/{id}")
+    public String deleteById(@PathVariable Long id) {
+            provinceService.deleteProvinceById(id);
+            return "redirect:/provinces";
+    }
+
 
     @PostMapping("/update/{id}")
     public String update(@ModelAttribute("province") Province province,

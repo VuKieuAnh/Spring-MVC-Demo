@@ -41,7 +41,7 @@ public class ProvinceService implements IProvinceService {
     };
 
     public void deleteProvinceById(Long id){
-        iProvinceRepository.deleteProvinceById(id);
+        iProvinceRepository.xoaTinhTheoId(id);
     };
 
 }

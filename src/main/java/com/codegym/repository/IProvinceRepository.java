@@ -20,4 +20,14 @@ public interface IProvinceRepository extends JpaRepository<Province, Long> {
     @Transactional
     @Query(nativeQuery = true, value = "call deleteprovincebyid(:id)")
     void deleteProvinceById(@Param("id") Long id);
+
+//query de sua du lieu
+    @Modifying
+//query de thuc hien nhieu thao tac
+    @Transactional
+    @Query(nativeQuery = true, value = "call deleteprovincebyid(:id)")
+    void xoaTinhTheoId(@Param("id") Long id);
+
+
+//    Province getProvincesByNema(String name);
 }

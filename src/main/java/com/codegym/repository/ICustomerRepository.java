@@ -15,6 +15,7 @@ public interface ICustomerRepository extends CrudRepository<Customer, Long> {
     Page<Customer> findAllByFirstNameContaining(Pageable pageable, String name);
 //    Page<Customer> findAllByFirstName1Containing(Pageable pageable, String name);
 
+    Page<Customer> findAllByLastNameContaining(Pageable pageable, String name);
 //    dinh nghia phuong thuc truy van
 //    tim kiem theo lastName
 //    danh sach

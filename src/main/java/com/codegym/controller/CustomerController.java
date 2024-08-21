@@ -71,7 +71,7 @@ public class CustomerController {
 //        modelAndView.addObject("a","KAX");
         return modelAndView;
     }
-
+//
     @PostMapping("/create")
     public String create(@ModelAttribute("customer") Customer customer,
                          RedirectAttributes redirectAttributes) {
@@ -79,15 +79,21 @@ public class CustomerController {
         redirectAttributes.addFlashAttribute("message", "Create new customer successfully");
         return "redirect:/customers";
     }
-//    @PostMapping("/create")
-//    public String create(@RequestParam String firstName,
-//                         @RequestParam String lastName,
-//                         @RequestParam String province) {
-//        Customer customer = new Customer();
-////        customerService.save(customer);
-////        redirectAttributes.addFlashAttribute("message", "Create new customer successfully");
-//        return "redirect:/customers";
-//    }
+
+    @PostMapping("/create1")
+    public String create(@RequestParam String firstName,
+                         @RequestParam String lastName,
+                         @RequestParam String province) {
+        Customer customer = new Customer();
+        customer.setFirstName(firstName);
+        customer.setLastName(lastName);
+        Long id = Long.parseLong(province);
+        Province p = provinceService.findById(id).get();
+        customer.setProvince(p);
+//        customerService.save(customer);
+//        redirectAttributes.addFlashAttribute("message", "Create new customer successfully");
+        return "redirect:/customers";
+    }
 
     @GetMapping("/update/{id}")
     public ModelAndView updateForm(@PathVariable Long id) {

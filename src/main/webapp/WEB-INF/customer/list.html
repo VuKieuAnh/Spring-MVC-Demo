@@ -16,7 +16,7 @@
     </a>
 </p>
 <div style="margin-bottom: 10px; margin-left: 110px">
-    <form th:action="@{/customers/search}" method="post">
+    <form th:action="@{/customers/search}" method="get">
         <label><input type="text" name="search"></label>
         <button type="submit" class="btn btn-primary">Search</button>
     </form>
@@ -43,8 +43,13 @@
         <td th:text="${cStatus.count}"></td>
         <td th:text="${c.getFirstName()}"></td>
         <td th:text="${c.getLastName()}"></td>
+        <th:block th:if="${c.getProvince() != null}">
 <!--        neu tinh !== null-->
-        <td th:text="${c.getProvince().getName()}"></td>
+        <td th:text="${c.getProvince().getName()}"></td></th:block>
+
+        <th:block th:unless="${c.getProvince() != null}">
+<!--        neu tinh !== null-->
+        <td >Khong co du lieu</td></th:block>
 <!--        neu tinh == null-->
 <!--        hien thi la khong co du lieu-->
         <td><a th:href="@{/customers/update/{id}(id=${c.getId()})}">update</a></td>
