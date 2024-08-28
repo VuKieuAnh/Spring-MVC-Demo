@@ -5,8 +5,10 @@ import com.codegym.model.Province;
 import com.codegym.service.ICustomerService;
 import com.codegym.service.IProvinceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -61,6 +63,16 @@ public class CustomerController {
         }
         ModelAndView modelAndView = new ModelAndView("/customer/list");
         modelAndView.addObject("customers", customers);
+        return modelAndView;
+    }
+
+    @GetMapping("/demo")
+    public ModelAndView listCustomersSearch1(@Qualifier("cus") @PageableDefault(size = 5)Pageable pageable1, @Qualifier("pro") @PageableDefault(size = 2) Pageable pageable ){
+        Page<Customer> customers = customerService.findAll(pageable1);
+        Page<Province> provinces = provinceService.findAll(pageable);
+        ModelAndView modelAndView = new ModelAndView("/customer/list");
+        modelAndView.addObject("customers", customers);
+        modelAndView.addObject("provinces", provinces);
         return modelAndView;
     }
 

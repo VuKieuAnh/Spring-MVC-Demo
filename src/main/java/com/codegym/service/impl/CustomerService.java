@@ -17,6 +17,11 @@ public class CustomerService implements ICustomerService {
     private ICustomerRepository iCustomerRepository;
 
     @Override
+    public Iterable<Customer> findAllByFirstNameContaining(String name) {
+        return iCustomerRepository.findAllByFirstNameContaining(name);
+    }
+
+    @Override
     public Iterable<Customer> findAll() {
         return iCustomerRepository.findAll();
     }

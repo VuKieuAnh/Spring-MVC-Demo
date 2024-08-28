@@ -58,11 +58,35 @@
     </tbody>
 </table>
 <p th:text="${a}"></p>
-<!--<a class="btn btn-primary" th:if="${customers.hasPrevious()}"-->
-<!--   th:href="@{/customers/page(page=${customers.number - 1})}">Previous</a>-->
-<!--<span th:text="${customers.number + 1}"></span> | <span th:text="${customers.totalPages}"></span>-->
-<!--<a class="btn btn-primary" th:if="${customers.hasNext()}"-->
-<!--   th:href="@{/customers/page(page=${customers.number + 1})}">Next</a>-->
+<a class="btn btn-primary" th:if="${customers.hasPrevious()}"
+   th:href="@{/customers/page(page=${customers.number - 1})}">Previous</a>
+<span th:text="${customers.number + 1}"></span> | <span th:text="${customers.totalPages}"></span>
+<a class="btn btn-primary" th:if="${customers.hasNext()}"
+   th:href="@{/customers/page(page=${customers.number + 1})}">Next</a>
+<footer th:replace="/layout :: footer"></footer>
+<table id = "customers1">
+    <thead>
+    <tr>
+        <th>STT</th>
+        <th>name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="c,cStatus : ${provinces}">
+        <td th:text="${cStatus.count}"></td>
+        <td th:text="${c.getName()}"></td>
+        <th:block th:if="${c.getProvince() != null}">
+<!--        neu tinh !== null-->
+        <td th:text="${c.getProvince().getName()}"></td></th:block>
+    </tr>
+    </tbody>
+</table>
+<p th:text="${a}"></p>
+<a class="btn btn-primary" th:if="${provinces.hasPrevious()}"
+   th:href="@{/customers/page(page=${provinces.number - 1})}">Previous</a>
+<span th:text="${customers.number + 1}"></span> | <span th:text="${provinces.totalPages}"></span>
+<a class="btn btn-primary" th:if="${provinces.hasNext()}"
+   th:href="@{/customers/page(page=${provinces.number + 1})}">Next</a>
 <footer th:replace="/layout :: footer"></footer>
 </body>
 </html>

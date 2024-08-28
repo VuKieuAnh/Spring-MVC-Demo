@@ -32,6 +32,15 @@ public class CustomerRestController {
         return new ResponseEntity<>(customers, HttpStatus.OK);
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<Iterable<Customer>> findAllCustomerByName(@RequestParam String name) {
+        List<Customer> customers = (List<Customer>) iCustomerService.findAllByFirstNameContaining(name);
+        if (customers.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(customers, HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Customer> findCustomerById(@PathVariable Long id) {
         Optional<Customer> customerOptional = iCustomerService.findById(id);

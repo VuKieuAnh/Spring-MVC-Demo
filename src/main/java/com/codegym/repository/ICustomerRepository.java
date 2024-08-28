@@ -12,6 +12,8 @@ public interface ICustomerRepository extends CrudRepository<Customer, Long> {
 
     Page<Customer> findAll(Pageable pageable);
 
+    Iterable<Customer> findAllByFirstNameContaining(String firstName);
+
     Page<Customer> findAllByFirstNameContaining(Pageable pageable, String name);
 //    Page<Customer> findAllByFirstName1Containing(Pageable pageable, String name);
 
