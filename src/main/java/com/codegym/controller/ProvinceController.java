@@ -2,10 +2,15 @@ package com.codegym.controller;
 
 import com.codegym.model.Customer;
 import com.codegym.model.DTO.ICountCustomer;
+import com.codegym.model.DTO.ProvinceDTO;
 import com.codegym.model.Province;
 import com.codegym.service.ICustomerService;
 import com.codegym.service.IProvinceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,6 +26,15 @@ public class ProvinceController {
 
     @Autowired
     private ICustomerService customerService;
+
+
+    @GetMapping("/list")
+    public ModelAndView modelAndView( Pageable pageable){
+        pageable = PageRequest.of(pageable.getPageNumber(), 3);
+        Page<Province> provinces = provinceService.findAll(pageable);
+        return new ModelAndView("/province/list", "provinces", provinces);
+    }
+
     
     @GetMapping
     public ModelAndView listProvince() {
@@ -43,7 +57,7 @@ public class ProvinceController {
     @PostMapping("/create")
     public String create(@ModelAttribute("province") Province province,
                          RedirectAttributes redirectAttributes) {
-        provinceService.save(province);
+//        provinceService.save(province);
         redirectAttributes.addFlashAttribute("message", "Create new province successfully");
         return "redirect:/provinces";
     }
@@ -103,6 +117,14 @@ public class ProvinceController {
     public ModelAndView getDemo(){
         ModelAndView modelAndView = new ModelAndView("/province/list");
         Iterable<ICountCustomer> provinces = provinceService.getCountCustomers();
+        modelAndView.addObject("ps", provinces);
+        return modelAndView;
+    }
+
+    @GetMapping("/count")
+    public ModelAndView countProvince(){
+        ModelAndView modelAndView = new ModelAndView("/province/count");
+        Iterable<ProvinceDTO> provinces = provinceService.countCustomerByProvice();
         modelAndView.addObject("ps", provinces);
         return modelAndView;
     }

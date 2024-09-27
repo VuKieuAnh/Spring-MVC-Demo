@@ -31,13 +31,19 @@
     </thead>
     <tbody>
     <tr th:each="p, pStatus : ${provinces}">
-        <td th:text="${pStatus.count}"></td>
+        <td th:text="${p.id}"></td>
         <td><a th:href="@{/provinces/view-province/{id}(id=${p.getId()})}" th:text="${p.getName()}"></a></td>
         <td><a th:href="@{/provinces/delete/{id}(id=${p.getId()})}" >Xoa</a></td>
         <td><a th:href="@{/provinces/update/{id}(id=${p.getId()})}">update</a></td>
     </tr>
     </tbody>
 </table>
+
+<!--<neu co trang trc hien thi nut pre>-->
+<a th:if="${provinces.hasPrevious()}" th:href="@{/provinces/list?(page=${provinces.number-1})}">Trang trc</a>
+<span th:text="${provinces.number+1}"></span>|<span th:text="${provinces.totalPages}"></span>
+<!--<Neu co trang sau thi hien thi nut nex-->
+<a th:if="${provinces.hasNext()}">Trang sau</a>
 <table id = "">
     <thead>
     <tr>

@@ -1,6 +1,7 @@
 package com.codegym.service.impl;
 
 import com.codegym.model.DTO.ICountCustomer;
+import com.codegym.model.DTO.ProvinceDTO;
 import com.codegym.model.Province;
 import com.codegym.repository.IProvinceRepository;
 import com.codegym.service.IProvinceService;
@@ -51,4 +52,8 @@ public class ProvinceService implements IProvinceService {
         iProvinceRepository.xoaTinhTheoId(id);
     };
 
+    @Override
+    public Iterable<ProvinceDTO> countCustomerByProvice() {
+        return iProvinceRepository.countCustomerByProvice();
+    }
 }

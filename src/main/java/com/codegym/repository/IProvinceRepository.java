@@ -2,6 +2,7 @@ package com.codegym.repository;
 
 import com.codegym.model.Customer;
 import com.codegym.model.DTO.ICountCustomer;
+import com.codegym.model.DTO.ProvinceDTO;
 import com.codegym.model.Province;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -39,5 +40,8 @@ public interface IProvinceRepository extends PagingAndSortingRepository<Province
     void xoaTinhTheoId(@Param("id") Long id);
 
 
-//    Province getProvincesByNema(String name);
+
+    @Query(nativeQuery = true, value = "select province.id, name, count(firstName) as count from province left join customer_cg.customer c on province.id = c.province_id\n" +
+            "group by province.id;")
+    Iterable<ProvinceDTO> countCustomerByProvice();
 }

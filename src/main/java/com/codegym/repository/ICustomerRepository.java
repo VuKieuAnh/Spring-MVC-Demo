@@ -12,15 +12,10 @@ public interface ICustomerRepository extends CrudRepository<Customer, Long> {
 
     Page<Customer> findAll(Pageable pageable);
 
+    Iterable<Customer> findAllByLastName(String name);
+
     Iterable<Customer> findAllByFirstNameContaining(String firstName);
 
     Page<Customer> findAllByFirstNameContaining(Pageable pageable, String name);
-//    Page<Customer> findAllByFirstName1Containing(Pageable pageable, String name);
 
-    Page<Customer> findAllByLastNameContaining(Pageable pageable, String name);
-//    dinh nghia phuong thuc truy van
-//    tim kiem theo lastName
-//    danh sach
-//    Phai viet dung theo goi y
-//    Page<Customer> findAllByLastNameContaining(Pageable pageable, String name);
 }
