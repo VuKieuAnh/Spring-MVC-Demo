@@ -54,6 +54,7 @@ public class ProvinceService implements IProvinceService {
 
     @Override
     public Iterable<ProvinceDTO> countCustomerByProvice() {
+//        return null;
         return iProvinceRepository.countCustomerByProvice();
     }
 }

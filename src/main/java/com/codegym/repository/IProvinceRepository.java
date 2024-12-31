@@ -36,12 +36,16 @@ public interface IProvinceRepository extends PagingAndSortingRepository<Province
     @Modifying
 //query de thuc hien nhieu thao tac
     @Transactional
-    @Query(nativeQuery = true, value = "call deleteprovincebyid(:id)")
+    @Query(nativeQuery = true, value = "call deleteProvinceById(:id)")
     void xoaTinhTheoId(@Param("id") Long id);
 
 
 
-    @Query(nativeQuery = true, value = "select province.id, name, count(firstName) as count from province left join customer_cg.customer c on province.id = c.province_id\n" +
-            "group by province.id;")
+    @Query(nativeQuery = true, value = "select province.id, name, count(firstName) as count from province left join customer c on province.id = c.province_id\n" +
+            "            group by province.id")
     Iterable<ProvinceDTO> countCustomerByProvice();
+
+    Iterable<Province> findByName(String name);
 }
+
+

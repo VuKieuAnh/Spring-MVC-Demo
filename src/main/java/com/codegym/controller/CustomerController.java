@@ -30,9 +30,8 @@ public class CustomerController {
         return provinceService.findAll();
     }
 
-
     @ModelAttribute("a")
-    public String a(){
+    public String getA(){
         return "demo ModelAttribute";
     }
 
@@ -80,32 +79,32 @@ public class CustomerController {
     public ModelAndView createForm() {
         ModelAndView modelAndView = new ModelAndView("/customer/create");
         modelAndView.addObject("customer", new Customer());
-//        modelAndView.addObject("a","KAX");
+//        modelAndView.addObject("a","Kieu Anh xinh");
         return modelAndView;
     }
 //
     @PostMapping("/create")
-    public String create(@ModelAttribute("customer") Customer customer,
+    public String create(Customer customer,
                          RedirectAttributes redirectAttributes) {
         customerService.save(customer);
         redirectAttributes.addFlashAttribute("message", "Create new customer successfully");
         return "redirect:/customers";
     }
 
-    @PostMapping("/create1")
-    public String create(@RequestParam String firstName,
-                         @RequestParam String lastName,
-                         @RequestParam String province) {
-        Customer customer = new Customer();
-        customer.setFirstName(firstName);
-        customer.setLastName(lastName);
-        Long id = Long.parseLong(province);
-        Province p = provinceService.findById(id).get();
-        customer.setProvince(p);
-//        customerService.save(customer);
-//        redirectAttributes.addFlashAttribute("message", "Create new customer successfully");
-        return "redirect:/customers";
-    }
+//    @PostMapping("/create1")
+//    public String create(@RequestParam String firstName,
+//                         @RequestParam String lastName,
+//                         @RequestParam String province) {
+//        Customer customer = new Customer();
+//        customer.setFirstName(firstName);
+//        customer.setLastName(lastName);
+//        Long id = Long.parseLong(province);
+//        Province p = provinceService.findById(id).get();
+//        customer.setProvince(p);
+////        customerService.save(customer);
+////        redirectAttributes.addFlashAttribute("message", "Create new customer successfully");
+//        return "redirect:/customers";
+//    }
 
     @GetMapping("/update/{id}")
     public ModelAndView updateForm(@PathVariable Long id) {

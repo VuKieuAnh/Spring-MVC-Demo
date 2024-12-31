@@ -1,6 +1,6 @@
 package com.codegym.configuration;
 
-import com.codegym.formatter.ProvinceFormatter;
+//import com.codegym.formatter.ProvinceFormatter;
 import com.codegym.service.IProvinceService;
 import com.codegym.service.impl.ProvinceService;
 import org.springframework.beans.BeansException;
@@ -37,7 +37,7 @@ import java.util.Properties;
 @EnableTransactionManagement
 @ComponentScan(basePackages = "com.codegym")
 @EnableJpaRepositories("com.codegym.repository")
-@EnableSpringDataWebSupport
+//@EnableSpringDataWebSupport
 public class AppConfiguration implements WebMvcConfigurer, ApplicationContextAware {
     private ApplicationContext applicationContext;
 
@@ -96,7 +96,7 @@ public class AppConfiguration implements WebMvcConfigurer, ApplicationContextAwa
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/customer_cg");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/customer_cg_c08");
         dataSource.setUsername("root");
         dataSource.setPassword("123456@Abc");
         return dataSource;
@@ -121,8 +121,8 @@ public class AppConfiguration implements WebMvcConfigurer, ApplicationContextAwa
         return new ProvinceService();
     }
 
-    @Override
-    public void addFormatters(FormatterRegistry registry) {
-        registry.addFormatter(new ProvinceFormatter(applicationContext.getBean(ProvinceService.class)));
-    }
+//    @Override
+//    public void addFormatters(FormatterRegistry registry) {
+//        registry.addFormatter(new ProvinceFormatter(applicationContext.getBean(ProvinceService.class)));
+//    }
 }
